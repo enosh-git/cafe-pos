@@ -9,24 +9,23 @@
 
 <body>
   <?php 
-    $total = 0;
+    $conn = mysqli_connect("localhost", "root", "", "cafe-pos");
+    if (!$conn) { die("Connection failed"); }
+    $result = mysqli_query($conn, "SELECT * FROM menu_items");
 
-    $menu = [
-      ["name" => "Biscoff Latte", "price" => 190],
-      ["name" => "Spanish Latte", "price" => 150],
-      ["name" => "Iced Americano", "price" => 120]
-    ];
+    while($row = mysqli_fetch_assoc($result)) {
+      echo "Name: {$row["name"]} Price: {$row["price"]} <br>";
+    }
+
+    // $menu = [
+    //   ["name" => "Biscoff Latte", "price" => 190],
+    //   ["name" => "Spanish Latte", "price" => 150],
+    //   ["name" => "Iced Americano", "price" => 120]
+    // ];
 
     // foreach ($menu as $item) {
     //   echo "Name: {$item["name"]} Price: {$item["price"]} <br>";
     // }
-
-
-    foreach ($menu as $item) {
-      $total += $item["price"];
-    }
-
-    echo $total;
   ?>
 </body>
 
